@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>GP4E</title>
+</head>
+<body>
+    <button id="lg">Login</button>
+    <br>
+    <span></span>
+    <script src="anime-master\anime-master\lib\anime.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        window.onload = function () {
+            for (var i= 0; i < document.getElementsByTagName("script").length; i++) {
+                if (document.getElementsByTagName("script")[i].getAttribute("src")!=null&&location.origin!=="file://") {
+                        document.getElementsByTagName("script")[i].setAttribute("src", location.origin + "/" + document.getElementsByTagName("script")[i].getAttribute("src"))
+                }
+            }
+        }
+        document.getElementById("lg").addEventListener("click",function () {
+
+        })
+    </script>
+</body>
+</html>
