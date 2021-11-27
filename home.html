@@ -18,7 +18,9 @@
     <script src="user-helper\user.js"></script>
     <script src="utility/switch.js"></script>
     <script>
-
+        window.onload = function () {
+            document.getElementById("bar").style.width = 0
+        }
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             mem(profile)
