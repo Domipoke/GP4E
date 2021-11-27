@@ -18,9 +18,6 @@
     <script src="user-helper\user.js"></script>
     <script src="utility/switch.js"></script>
     <script>
-        window.onload = function () {
-            document.getElementById("bar").style.width = 0
-        }
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             mem(profile)
@@ -35,9 +32,9 @@
         function toggleBar() {
             var d = document.getElementById("bar")
             
-            nw = switch_(d.style.height,"100px","0px")
+            nw = switch_(d.style.display,"block","none")
             console.log(nw)
-            d.style.height = nw 
+            d.style.display = nw 
         }
     </script>
 </body>
