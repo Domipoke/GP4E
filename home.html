@@ -14,26 +14,10 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="user-helper\user.js"></script>
     <script>
-        avoidScript = [
-            "https://apis.google.com/js/platform.js"
-        ]
-        /*
-        window.onload = function () {
-            for (var i= 0; i < document.getElementsByTagName("script").length; i++) {
-                if (
-                    document.getElementsByTagName("script")[i].getAttribute("src")!=null&&
-                    location.origin!=="file://"&&
-                    !avoidScript.includes(
-                        document.getElementsByTagName("script")[i].getAttribute("src")
-                    )
-                    ) {
-                        document.getElementsByTagName("script")[i].setAttribute("src", location.origin + "/" + document.getElementsByTagName("script")[i].getAttribute("src"))
-                }
-            }
-        }
-        */
+
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
+            console.log(profile)
             mem(profile)
         }
         function signOut() {
