@@ -9,5 +9,10 @@ function log(profile) {
 
 function mem(profile) {
     var s = window.localStorage
-    s.setItem("profile",profile)
+    s.setItem('ID',profile.getId());
+    s.setItem('FullName',profile.getName());
+    s.setItem('GivenName',profile.getGivenName());
+    s.setItem('FamilyName',profile.getFamilyName());
+    s.setItem('ImageURL',profile.getImageUrl());
+    s.setItem('Email',profile.getEmail());
 }
