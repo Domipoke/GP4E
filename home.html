@@ -35,9 +35,9 @@
         function toggleBar() {
             var d = document.getElementById("bar")
             
-            nw = switch_(d.style.width,100,0)
+            nw = switch_(d.style.height,"100px","0px")
             console.log(nw)
-            d.style.width = nw 
+            d.style.height = nw 
         }
     </script>
 </body>
