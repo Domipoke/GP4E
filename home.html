@@ -32,7 +32,10 @@
         }
         function toggleBar() {
             var d = document.getElementById("bar")
-            d.style.width = switch_(d.style.width,100,0)
+            
+            nw = switch_(d.style.width,100,0)
+            console.log(nw)
+            d.style.width = nw 
         }
     </script>
 </body>
