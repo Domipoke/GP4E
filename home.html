@@ -52,7 +52,26 @@
     <script src="utility/switch.js"></script>
     <script>
         window.onload = function () {
-            
+            //code=sy7Zg9VzCVRbd3IPTo9q8guBQgGDVp
+            const fragment = new URLSearchParams(window.location.hash.slice(1));
+            const accessToken = fragment.get('access_token')
+            const tokenType = fragment.get('token_type')
+
+            if (!accessToken) {
+                return document.getElementById('login').style.display = 'block';
+            }
+
+            fetch('https://discord.com/api/users/@me', {
+                headers: {
+                    authorization: `${tokenType} ${accessToken}`,
+                },
+            })
+                .then(result => result.json())
+                .then(response => {
+                    const { username, discriminator } = response;
+                    document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+                })
+                .catch(console.error);
         }
         function login() {
             //force_verify=false
