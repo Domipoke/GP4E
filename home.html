@@ -64,12 +64,11 @@
                 anime({
                     targets: "#btn",
                     rotateZ: 180,
-                    duration: 1000
-                })
-                .finished.then(function () {
+                    duration: 500
+                }).finished.then(function () {
                     anime({
                         targets: "#dbar",
-                        translateY: "-15",
+                        translateY: "-18",
                         duration: 500
                     }).finished.then(document.querySelector("#bar").style.display = "none")
                 })
@@ -77,9 +76,8 @@
                 anime({
                     targets: "#btn",
                     rotateZ: 0,
-                    duration: 1000
-                })
-                .finished.then(function () {
+                    duration: 500
+                }).finished.then(function () {
                     anime({
                         targets: "#dbar",
                         translateY: "0",
