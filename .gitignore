@@ -1,3 +1,4 @@
 *.zip
 *.bat
 test.js
+fail/*
