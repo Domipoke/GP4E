@@ -55,8 +55,11 @@
             
         }
         function login() {
-            var url = "https://discord.com/api/oauth2/authorize?client_id=915328384945487963&redirect_uri=https%3A%2F%2Fdomipoke.github.io%2FGP4E%2Fhome.html&response_type=code&scope=identify"
-            var w = window.open(url,"popup")
+            //force_verify=false
+            //&state=9e33cbe206d87451ab6e6e367eb86890
+            var url = "https://discord.com/api/oauth2/authorize?client_id=915328384945487963&redirect_uri=https%3A%2F%2Fdomipoke.github.io%2FGP4E%2Fhome.html&response_type=code&scope=identify&prompt=none&approval_prompt=auto"
+            var _name = "window"
+            var w = window.open(url,_name,"popup")
             
         }
         function onSignIn(googleUser) {
