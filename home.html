@@ -53,36 +53,20 @@
     <script src="utility/switch.js"></script>
     <script>
         window.onload = function () {
-            //code=sy7Zg9VzCVRbd3IPTo9q8guBQgGDVp
-            var CLIENT_ID = "915328384945487963"
-            var CLIENT_SECRET = "WHIJ36W6nojkPLWdtId_mEn_bHmrBru4" 
-            $.getJSON(
-                "https://discord.com/api/v8/oauth2/token",
-                {
-                    data: {
-                        'client_id': CLIENT_ID,
-                        'client_secret': CLIENT_SECRET,
-                        'grant_type': 'authorization_code',
-                        'code': ,
-                        'redirect_uri': REDIRECT_URI
-                    },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                },
-                function (data) {
-                    console.log(data)
-                }
-            )
+            if (x!=null&&x!=undefined) {
+                // token_type=Bearer&
+                // access_token=3AuJtl5trCD8dtcIlrkMTVUook0uf0&
+                // expires_in=604800&
+                // scope=identify&
+                // state=15773059ghq9183habn
+                var u = new URLSearchParams(window.location.search)
+                u.get("access_token")
+                u.get("scope")
+                u.get("state")
+            }   
         }
         function login() {
-            //force_verify=false
-            //&state=9e33cbe206d87451ab6e6e367eb86890
-            //http://127.0.0.1:5500/home.html
-            var url = "https://discord.com/api/oauth2/authorize?client_id=915328384945487963&redirect_uri=https%3A%2F%2Fdomipoke.github.io%2FGP4E%2Fhome.html&response_type=code&scope=identify&prompt=none&approval_prompt=auto"
-            var localurl = "https://discord.com/api/oauth2/authorize?client_id=915328384945487963&redirect_uri=http%3A%2F%2F127.0.0.1%3A5500%2Fhome.html&response_type=code&scope=identify&prompt=none&approval_prompt=auto"
-            var _name = "window"
-            window.location.href = localurl;
+            window.location.href = "https://discord.com/oauth2/authorize?response_type=token&client_id=915328384945487963&state=15773059ghq9183habn&scope=identify"
             
         }
         function onSignIn(googleUser) {
