@@ -39,51 +39,24 @@
         <tr >
             <td><Button id="btn" onclick="toggleBar()">^</Button></td>
             <td id="bar">
-                <Button id="login" onClick="discordlogin()">Discord</Button>
+                <Button id="login" onClick="lg()">Discord</Button>
             </td>
         </tr>    
     </table>
     <div id="info"></div>
     
 
-    
+    <script async src="https://telegram.org/js/telegram-widget.js?15" data-userpic="false" data-telegram-login="GP4E_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
     <script src="jquery/jquery-3.6.0.min.js"></script>
     <script src="anime-master\anime-master\lib\anime.min.js"></script>
     <script src="user-helper\user.js"></script>
     <script src="utility/switch.js"></script>
     <script>
         window.onload = function () {
-            var x = window.location.hash
-            if (x!=null&&x!=undefined) {
-                var u = new URLSearchParams(x)
-                var CID = "915328384945487963"
-                var s = "WHIJ36W6nojkPLWdtId_mEn_bHmrBru4"
-                u.get("access_token")
-                u.get("scope")
-                u.get("state")
-                var r = $.ajax({
-                    url: "https://discord.com/oauth2/token", 
-                    type: 'post',
-                    data: {
-                    'client_id': CID,
-                    'client_secret': s,
-                    'grant_type': 'authorization_code',
-                    'scope':'identify'
-                    },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Access-Control-Allow-Origin': '*'
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log(data.responseJSON)
-                    }
-                })
-            }   
+             
         }
-        function discordlogin() {
-            window.location.href = "https://discord.com/oauth2/authorize?response_type=token&client_id=915328384945487963&state=15773059ghq9183habn&scope=identify"
-            
+        function onTelegramAuth(user) {
+            alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
         }
 
         function toggleBar() {
