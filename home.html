@@ -39,7 +39,7 @@
         <tr >
             <td><Button id="btn" onclick="toggleBar()">^</Button></td>
             <td id="bar">
-                <Button id="login" onClick="login()">Discord</Button>
+                <Button id="login" onClick="discordlogin()">Discord</Button>
             </td>
         </tr>    
     </table>
@@ -71,7 +71,7 @@
                 })
             }   
         }
-        function login() {
+        function discordlogin() {
             window.location.href = "https://discord.com/oauth2/authorize?response_type=token&client_id=915328384945487963&state=15773059ghq9183habn&scope=identify"
             
         }
