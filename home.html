@@ -61,13 +61,22 @@
                 u.get("access_token")
                 u.get("scope")
                 u.get("state")
-                var r = $.post("https://discord.com/oauth2/token", {
+                var r = $.ajax({
+                    url: "https://discord.com/oauth2/token", 
+                    type: 'post',
+                    data: {
                     'client_id': CID,
                     'client_secret': s,
                     'grant_type': 'authorization_code',
                     'scope':'identify'
-                }).then(function (data) {
-                    console.log(data.responseJSON)
+                    },
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data.responseJSON)
+                    }
                 })
             }   
         }
