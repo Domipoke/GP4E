@@ -53,46 +53,29 @@
     <script src="utility/switch.js"></script>
     <script>
         window.onload = function () {
+            x = window.
             if (x!=null&&x!=undefined) {
-                // token_type=Bearer&
-                // access_token=3AuJtl5trCD8dtcIlrkMTVUook0uf0&
-                // expires_in=604800&
-                // scope=identify&
-                // state=15773059ghq9183habn
                 var u = new URLSearchParams(window.location.search)
+                var CID = "915328384945487963"
+                var s = "WHIJ36W6nojkPLWdtId_mEn_bHmrBru4"
                 u.get("access_token")
                 u.get("scope")
                 u.get("state")
+                var r = $.post("https://discord.com/oauth2/token", {
+                    'client_id': CID,
+                    'client_secret': s,
+                    'grant_type': 'authorization_code',
+                    'scope':'identify'
+                }).then(function (data) {
+                    console.log(data.responseJSON)
+                })
             }   
         }
         function login() {
             window.location.href = "https://discord.com/oauth2/authorize?response_type=token&client_id=915328384945487963&state=15773059ghq9183habn&scope=identify"
             
         }
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            //mem(profile)
-            //ChangeButton
-            // var gProfile = {
-            //     in:document.querySelector(".g-signin2"),
-            //     stay:document.querySelector(".profile"),
-            //     out:document.querySelector(".signout")
-            // }
-            // var div = document.createElement("div")
-            // var img = document.createElement("img")
-            // img.setAttribute("src",profile.getImageUrl())
-            // img.style.width=50
-            // img.style.height=50
-            // div.appendChild(img)
-            // gProfile.innerHTML
-        }
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-            window.localStorage.clear()
-        }
+
         function toggleBar() {
             if (document.querySelector("#bar").style.display=="block") {
                 anime({
