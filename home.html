@@ -53,9 +53,9 @@
     <script src="utility/switch.js"></script>
     <script>
         window.onload = function () {
-            x = window.
+            var x = window.location.hash
             if (x!=null&&x!=undefined) {
-                var u = new URLSearchParams(window.location.hash)
+                var u = new URLSearchParams(x)
                 var CID = "915328384945487963"
                 var s = "WHIJ36W6nojkPLWdtId_mEn_bHmrBru4"
                 u.get("access_token")
