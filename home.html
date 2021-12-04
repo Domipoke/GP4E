@@ -33,18 +33,64 @@
         }
         .g-signin2 {
             float: right;
-        }    
+        } 
+        #menubar {
+            bottom: 0;
+            position:absolute;
+            width:100%;
+            height: 45px;
+            background-color: #9FE1F2;
+        }   
+        #desktop {
+            background-color: #9FE1F2AA;
+            width:100%;
+            height: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            z-index: -3;
+            padding-top: 60px;
+        }
+        div {
+            padding: 0;
+            margin: 0;
+        }
+        .icon {
+            width: 32px;
+            height: 32px;
+        }
+        .row1{
+            padding-left: 15px;
+        }
+        .col1{
+            padding-top:0px;
+        }
+        #window{
+            width: 30%;
+            height: 30%;
+            position:absolute
+        }
     </style>
     <table id="dbar">
-        <tr >
+        <tr>
             <td><Button id="btn" onclick="toggleBar()">^</Button></td>
             <td id="bar">
-                <Button onClick="openLoginPopup()">Login</Button>
             </td>
         </tr>    
     </table>
-    <div id="info">Upd</div>
-    
+    <div id="desktop">
+        <div id="AboutUs" class="row1 col1" onclick="openAboutUs()"><img class="icon" src="img/web.png"></div>
+    </div>
+    <div id="menubar">
+        <table>
+            <tr>
+                <td><img class="icon" src="img/256x256.png"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="window">
+
+    </div>
     <script src="jquery/jquery-3.6.0.min.js"></script>
     <script src="anime-master\anime-master\lib\anime.min.js"></script>
     <script src="user-helper\user.js"></script>
@@ -57,55 +103,7 @@
             console.log(user)
             console.log()
         }
-        function openLoginPopup() {
-            var w = 500 
-            var h = 500
-            var lg = window.open(
-                "",
-                "",
-                "popup=yes,width="+w+
-                ",height="+h
-            )
-            code = function () {
-                var x = Math.floor(Math.random()*100000)
-                var y = x.toString().split('')
-                for (y.length;y.length<5;y.unshift(0)) {}
-                return y.join("")
-            }
-
-            //+"left="+((window.innerWidth-w)/2)+
-            //"top="+((window.innerHeight-h)/2)
-            var form = document.createElement("form")
-            var lb = document.createElement("label")
-            lb.setAttribute("for","to")
-            var input = document.createElement("input") 
-            input.type="text"
-            input.name="to"
-            input.id="to"
-            form.appendChild(input)
-            form.appendChild(lb)
-            var btn = document.createElement("input")
-            btn.type = "submit";
-            btn.value="Send"
-            form.appendChild(btn)
-            form.action=
-            `<?php`+
-            `$from = "assistenzagp4e@gmail.com"`+
-            `$to = ""`+
-            `$message = '`+
-            `Benvenuto sul sito di GP4E`+
-            `Il tuo codice di verifica è: `+code()+
-            `'`+
-            `$headers = array(`+
-                `'From' => $from,`+
-                `'Reply-To' => 'webmaster@example.com'`+
-            `);`+
-
-            `mail($to,"Codice di verifica GP4E",$message,$header)`+
-            `?>`
-            
-            lg.document.body.appendChild(form)
-        }
+        
         function toggleBar() {
             if (document.querySelector("#bar").style.display=="block") {
                 anime({
@@ -135,6 +133,9 @@
             
             
             
+        }
+        function openAboutUs() {
+
         }
     </script>
 </body>
