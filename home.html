@@ -8,6 +8,15 @@
 </head>
 <body>
     <style>
+        *:not(.sel) {
+            -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+                        user-select: none; /* Non-prefixed version, currently
+                                            supported by Chrome and Opera */
+        }
         body {
             padding: 0;
             margin:0;
@@ -73,11 +82,13 @@
             height: 30%;
             position:absolute;
             display: none;
+            background-color: whitesmoke;
         }
     </style>
     <table id="dbar">
         <tr>
             <td><Button id="btn" onclick="toggleBar()">^</Button></td>
+            <td><button id="btn" onclick="toggleDrag()">+</button></td>
             <td id="bar">
             </td>
         </tr>    
@@ -93,7 +104,7 @@
         </table>
     </div>
     <div id="window">
-
+        
     </div>
     <script src="jquery/jquery-3.6.0.min.js"></script>
     <script src="anime-master\anime-master\lib\anime.min.js"></script>
@@ -102,6 +113,9 @@
     <script>
         window.onload = function () {
              
+        }
+        document.onload = function () {
+            
         }
         function onSignIn(user) {
             console.log(user)
@@ -138,18 +152,34 @@
             
             
         }
+        function toggleDrag() {
+            if (get("Drag")=="true") {
+                set("Drag","false")
+                document.onmouseup = null;
+                document.onmousemove = null;
+                document.querySelector("#window").onmousedown = null
+            } else {
+                document.querySelector("#window").onclick = dragElement(document.querySelector("#window"))
+            }
+        }
         function openAboutUs() {
-            
+            openWindow()
         }
         function openWindow() {
             var w = document.querySelector("#window")
             w.style.display = "block"
-            var x = y = 60
+            var x = 500
+            var y = 350
             if (KeyNotNull("WinSizeX")&&KeyNotNull("WinSizeY")) {
                 x = get("WinSizeX")
                 y = get("WinSizeY")
             }
-
+            w.style.width = x + "px"
+            w.style.height = y + "px"
+            w.style.left = ((window.innerWidth - x)/2) + "px"
+            w.style.top = ((window.innerHeight - y)/2) + "px"
+            //
+            
         }
     </script>
 </body>
