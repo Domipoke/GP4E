@@ -1,3 +1,4 @@
+/**
 function log(profile) {
     if (!profile) {profile=window.localStorage.getItem("profile")}
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -15,4 +16,18 @@ function mem(profile) {
     s.setItem('FamilyName',profile.getFamilyName());
     s.setItem('ImageURL',profile.getImageUrl());
     s.setItem('Email',profile.getEmail());
+}*/
+function get(key) {
+    var s = window.localStorage
+    return s.getItem(key)
+}
+function set(key,val) {
+    var s = window.localStorage
+    s.setItem(key,val)
+}
+function KeyNotNull(key) {
+    var x=get(key);
+    if (x!==null&&x!==undefined) {
+        return true;
+    } else return false
 }

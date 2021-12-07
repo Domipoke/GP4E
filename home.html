@@ -59,6 +59,9 @@
             width: 32px;
             height: 32px;
         }
+        .icon:hover:not(.noborder) {
+            border: whitesmoke 1px solid;
+        }
         .row1{
             padding-left: 15px;
         }
@@ -68,7 +71,8 @@
         #window{
             width: 30%;
             height: 30%;
-            position:absolute
+            position:absolute;
+            display: none;
         }
     </style>
     <table id="dbar">
@@ -84,7 +88,7 @@
     <div id="menubar">
         <table>
             <tr>
-                <td><img class="icon" src="img/256x256.png"></td>
+                <td><img class="icon noborder" src="img/256x256.png"></td>
             </tr>
         </table>
     </div>
@@ -135,6 +139,16 @@
             
         }
         function openAboutUs() {
+            
+        }
+        function openWindow() {
+            var w = document.querySelector("#window")
+            w.style.display = "block"
+            var x = y = 60
+            if (KeyNotNull("WinSizeX")&&KeyNotNull("WinSizeY")) {
+                x = get("WinSizeX")
+                y = get("WinSizeY")
+            }
 
         }
     </script>
