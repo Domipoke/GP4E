@@ -40,6 +40,16 @@
             height: 30px;
             display: block;
         }
+        #barbtn {
+            background: none;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin: 5px;
+            font-size: 32px;
+            height: 30px;
+            display: block;
+        }
         .g-signin2 {
             float: right;
         } 
@@ -68,14 +78,17 @@
             width: 32px;
             height: 32px;
         }
-        .icon:hover:not(.noborder) {
+        .iconHover:hover:not(.noborder) {
             border: whitesmoke 1px solid;
         }
         .row1{
-            padding-left: 15px;
+            padding-top:0px;
         }
         .col1{
-            padding-top:0px;
+            padding-left: 15px;
+        }
+        .col2 {
+            padding-left: 60px;
         }
         #window{
             width: 30%;
@@ -88,19 +101,27 @@
     <table id="dbar">
         <tr>
             <td><Button id="btn" onclick="toggleBar()">^</Button></td>
-            <td><button id="btn" onclick="toggleDrag()">+</button></td>
+            <td><button id="barbtn" onclick="toggleDrag()">+</button></td>
+            <td><button id="barbtn" onclick="fullScreenButton()">⛶</button></td>
+            
             <td id="bar">
             </td>
         </tr>    
     </table>
     <div id="desktop">
-        <div id="AboutUs" class="row1 col1" onclick="openAboutUs()"><img class="icon" src="img/web.png"></div>
+        <table>
+            <tr>
+                <td><div id="AboutUs" class="row1 col1" onclick="openAboutUs()"><img class="icon iconHover" src="img/web.png"></div></td>
+                <td><div id="AboutUs" class="row1 col1" onclick="openSocialYoutube()"><img class="iconHover" src="img/ytlogo.png"></div></td>
+            </tr>
+        </table>
     </div>
     <div id="menubar">
         <table>
             <tr>
                 <td><img class="icon noborder" src="img/256x256.png"></td>
             </tr>
+            
         </table>
     </div>
     <div id="window">
@@ -116,6 +137,9 @@
         }
         document.onload = function () {
             
+        }
+        window.onresize = function () {
+            if (get("FullScreen")=="true") {fullScreen()}
         }
         function onSignIn(user) {
             console.log(user)
@@ -133,8 +157,14 @@
                         targets: "#dbar",
                         translateY: "-18",
                         duration: 500
-                    }).finished.then(document.querySelector("#bar").style.display = "none")
+                    }).finished.then(function () {
+                        document.querySelector("#bar").style.display = "none"
+                        document.querySelectorAll("#barbtn").forEach(function (e) {
+                            e.style.display = "none"
+                        })
+                    })
                 })
+                
             } else {
                 anime({
                     targets: "#btn",
@@ -145,27 +175,61 @@
                         targets: "#dbar",
                         translateY: "0",
                         duration: 500
-                    }).finished.then(document.querySelector("#bar").style.display = "block")
+                    }).finished.then(function () {
+                        document.querySelector("#bar").style.display = "block"
+                        document.querySelectorAll("#barbtn").forEach(function (e) {
+                            e.style.display = "block"
+                        })
+                    })
                 })
+                
             }
             
             
             
         }
         function toggleDrag() {
-            if (get("Drag")=="true") {
-                set("Drag","false")
-                document.onmouseup = null;
-                document.onmousemove = null;
-                document.querySelector("#window").onmousedown = null
-            } else {
+//            if (get("Drag")=="true") {
+//                set("Drag","false")
+//                document.onmouseup = null;
+//                document.onmousemove = null;
+//                document.querySelector("#window").onmousedown = null
+//            } else {
                 document.querySelector("#window").onclick = dragElement(document.querySelector("#window"))
+//            }
+        }
+        function fullScreenButton() {
+            if (get("FullScreen")=="true") {
+                SetAsDefaultWindow()
+                set("FullScreen","false")
+            } else {
+                fullScreen()
+                set("FullScreen","true")
             }
         }
-        function openAboutUs() {
-            openWindow()
+        function fullScreen() {
+            var w = document.querySelector("#window")
+            w.style.width = document.querySelector("#desktop").offsetWidth + "px"
+            w.style.height = document.querySelector("#desktop").offsetHeight + "px"
+            w.style.left=0
+            w.style.top=(document.querySelector("#dbar").offsetHeight)+"px"
+            
         }
-        function openWindow() {
+        function openAboutUs() {
+            SetAsDefaultWindow()
+            var w = document.querySelector("#window")
+            $.get("windows/youtube.html", function (data) {
+                w.innerHTML = data
+            })
+          
+            
+        }
+        function openSocialYoutube() {
+            SetAsDefaultWindow()
+            var w = document.querySelector("#window")
+            w.innerHTML = ""
+        }
+        function SetAsDefaultWindow() {
             var w = document.querySelector("#window")
             w.style.display = "block"
             var x = 500
