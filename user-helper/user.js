@@ -71,5 +71,31 @@ function dragElement(elmnt) {
       //style
       elmnt.style.border = null;
       //
+      etop = Px(document.querySelector("#window").style.top)
+      elft = Px(document.querySelector("#window").style.left)
+      if (etop<Px(document.querySelector("#dbar").offsetHeight)) {
+          console.log(document.querySelector("#dbar").offsetHeight)
+          document.querySelector("#window").style.top=(Px(document.querySelector("#dbar").offsetHeight))+"px"
+      }
+      if (etop+Px(document.querySelector("#window").offsetHeight)>Px(window.innerHeight)-Px(document.getElementById("menubar").offsetHeight)) {
+        document.querySelector("#window").style.top=
+          (Px(window.innerHeight)-
+          Px(document.getElementById("menubar").offsetHeight)-
+          Px(document.querySelector("#window").offsetHeight))+"px"
+      }
+      if (elft<0) {
+        document.querySelector("#window").style.left=0
+      }
+      if (elft+Px(document.querySelector("#window").offsetWidth)>Px(window.innerWidth)) {
+        document.querySelector("#window").style.left = 
+          (Px(window.innerWidth)-Px(document.querySelector("#window").offsetWidth))+"px"
+      }
     }
+}
+function Px(str) {
+  if (str.toString().endsWith("px")) {
+    return parseInt(str.toString().slice(0,str.toString().length-2))
+  } else {
+    return parseInt(str)
+  }
 }

@@ -25,7 +25,8 @@
             background-color: #006469;
             padding: 5px;
             margin:0;
-            width: 100%
+            width: 100%;
+            z-index: 300;
         }
         #bar {
             float:right
@@ -65,7 +66,7 @@
             width:100%;
             height: 100%;
             display: block;
-            position: absolute;
+            position: fixed;
             top: 0;
             z-index: -3;
             padding-top: 60px;
@@ -93,9 +94,18 @@
         #window{
             width: 30%;
             height: 30%;
-            position:absolute;
+            position:fixed;
             display: none;
             background-color: whitesmoke;
+        }
+        #menubar #settings {
+            float: right;
+        }
+        #menubar #null {
+            width: 100%
+        }
+        .spacingright {
+            margin-right: 10px;
         }
     </style>
     <table id="dbar">
@@ -103,7 +113,7 @@
             <td><Button id="btn" onclick="toggleBar()">^</Button></td>
             <td><button id="barbtn" onclick="toggleDrag()">+</button></td>
             <td><button id="barbtn" onclick="fullScreenButton()">⛶</button></td>
-            
+            <td><button id="barbtn" onclick="closeWin()">x</button></td>
             <td id="bar">
             </td>
         </tr>    
@@ -120,6 +130,8 @@
         <table>
             <tr>
                 <td><img class="icon noborder" src="img/256x256.png"></td>
+                <td id="null"></td>
+                <td id="settings" class="spacingright"><img class="icon noborder" src="img/setting.svg"></td>
             </tr>
             
         </table>
@@ -133,10 +145,47 @@
     <script src="utility/switch.js"></script>
     <script>
         window.onload = function () {
-             
+            if (!KeyNotNull("WinSizeX")) {
+                set("WinSizeX",500)                
+            }
+            if (!KeyNotNull("WinSizeY")) {
+                set("WinSizeY",250)
+            }
         }
         document.onload = function () {
             
+        }
+        document.querySelector("#menubar #settings").onclick = function () {
+            anime({
+                targets: "#menubar #settings img",
+                duration: 500,
+                rotateZ: 360,
+            }).finished.then(function () {
+                document.querySelector("#menubar #settings img").style.transform=""
+                SetAsDefaultWindow()
+                var w = document.querySelector("#window")
+                w.style.width="100%"
+                var h = 100
+                w.style.height=h+"px"
+
+                w.style.left=0+"px"
+                w.style.top=(window.innerHeight-document.querySelector("#menubar").offsetHeight-h)+"px"
+                
+
+                $.get("windows/settings.html", function (data) {
+                    w.innerHTML = data
+                }).then(
+                function () {
+                    document.querySelector("#winstg #winstg_width").value = get("WinSizeX")
+                    document.querySelector("#winstg #winstg_width").onchange = function () {
+                        set("WinSizeX",document.querySelector("#winstg #winstg_width").value)
+                    }
+                    document.querySelector("#winstg #winstg_height").value = get("WinSizeY")
+                    document.querySelector("#winstg #winstg_height").onchange = function () {
+                        set("WinSizeY",document.querySelector("#winstg #winstg_height").value)
+                    }
+                })
+            })
         }
         window.onresize = function () {
             if (get("FullScreen")=="true") {fullScreen()}
@@ -145,7 +194,9 @@
             console.log(user)
             console.log()
         }
-        
+        function closeWin() {
+            var w = document.querySelector("#window").style.display = "none"
+        }
         function toggleBar() {
             if (document.querySelector("#bar").style.display=="block") {
                 anime({
@@ -210,15 +261,14 @@
         function fullScreen() {
             var w = document.querySelector("#window")
             w.style.width = document.querySelector("#desktop").offsetWidth + "px"
-            w.style.height = document.querySelector("#desktop").offsetHeight + "px"
+            w.style.height = document.querySelector("#desktop").offsetHeight-document.querySelector("#dbar").offsetHeight-document.querySelector("#menubar").offsetHeight + "px"
             w.style.left=0
             w.style.top=(document.querySelector("#dbar").offsetHeight)+"px"
-            
         }
         function openAboutUs() {
             SetAsDefaultWindow()
             var w = document.querySelector("#window")
-            $.get("windows/youtube.html", function (data) {
+            $.get("windows/aboutus.html", function (data) {
                 w.innerHTML = data
             })
           
@@ -227,11 +277,14 @@
         function openSocialYoutube() {
             SetAsDefaultWindow()
             var w = document.querySelector("#window")
-            w.innerHTML = ""
+            $.get("windows/youtube.html", function (data) {
+                w.innerHTML = data
+            })
         }
         function SetAsDefaultWindow() {
             var w = document.querySelector("#window")
             w.style.display = "block"
+            w.style.backgroundColor = "#FFFFFF"
             var x = 500
             var y = 350
             if (KeyNotNull("WinSizeX")&&KeyNotNull("WinSizeY")) {
